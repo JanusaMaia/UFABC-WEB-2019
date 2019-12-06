@@ -7,6 +7,7 @@
 <%@page import="br.com.janusamaia.meusinvestimentos.model.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="Usuario" type="Usuario" scope="session"/>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -21,14 +22,36 @@
     <body>
         <div class="container-fluid">
             <jsp:include page="menulogado.jsp" />
+            
             <div class="row">
                 <div class="col-md-12">
-                    
-                    <div class="jumbotron text-center">
-                        <h1>Meus investimentos</h1>
-                        <p>Organize e acompanhe a evolução dos seus investimentos!</p> 
-                    </div>
-                    
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nome da Conta</th>
+                                <th>Banco</th>
+                                <th>Agência/Conta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:if test="${empty Usuario.contas}">
+                                <h4> Não há contas cadastradas</h4>    
+                            </c:if>
+                            <c:forEach var="conta" items="${Usuario.contas}">
+                                <tr>
+                                    <td>
+                                        ${conta.apelidoConta}
+                                    </td>
+                                    <td>
+                                        ${conta.banco}
+                                    </td>
+                                    <td>
+                                        ${conta.agencia}/${conta.numero}
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             

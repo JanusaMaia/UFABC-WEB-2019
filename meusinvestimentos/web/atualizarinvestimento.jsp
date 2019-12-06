@@ -1,3 +1,7 @@
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@page import="br.com.janusamaia.meusinvestimentos.model.Usuario"%>
+<jsp:useBean id="Usuario" type="Usuario" scope="session" />
+<jsp:useBean id="IdInvest" type="Integer" scope="session" />
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,48 +16,39 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="text-center text-muted bg-dark font-weight-normal" style="margin-bottom: 0">
-                    Meus Investimentos
-                </h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar align-content-end bg-dark">
-                    <ul class="nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="./">Voltar</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+         <jsp:include page="menulogado.jsp" />
         
         <div class="row">
             <div class="col-md-3">
             </div>
             <div class="col-md-6">
                 <br><br>
-                <form role="form" action="loginservlet" method="POST">
+                <form role="form" action="efetivaAtualizarInvestimento" method="POST">
+                    
                     <div class="form-group">
-                        <label for="InputEmail">
-                                Email
+                        <label for="InputId">
+                                ID investimento
                         </label>
-                        <input type="email" class="form-control" id="InputEmail" name="inputEmail" />
+                        <input type="text" class="form-control" id="InputId" name="inputId" value="${IdInvest}" readonly="true" required="true"/>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="InputSenha">
-                                Senha
+                        <label for="InputData">
+                                Data
                         </label>
-                        <input type="password" class="form-control" id="InputSenha" name="inputSenha" />
+                        <input type="date" class="form-control" id="InputData" name="inputData" required="true" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="InputValor">
+                                Valor Atual
+                        </label>
+                        <input type="text" class="form-control" id="InputValor" name="inputValor" required="true"/>
                     </div>
                     
                     <button type="submit" class="btn btn-primary">
-                            Acessar
+                            Salvar
                     </button>
-                    Novo usuário? Clique <a href="novousuario">aqui</a>
                 </form>
             </div>
             <div class="col-md-3">
@@ -64,5 +59,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 </body>
 </html>

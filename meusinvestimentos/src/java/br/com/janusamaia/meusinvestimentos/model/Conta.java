@@ -6,6 +6,7 @@
 package br.com.janusamaia.meusinvestimentos.model;
 
 import java.util.List;
+import jdk.nashorn.internal.objects.annotations.Constructor;
 
 /**
  *
@@ -15,12 +16,12 @@ public class Conta implements java.io.Serializable{
     private int id;
     private String banco;
     private String apelidoConta;
-    private int agencia;
-    private int conta;
-    private int digito;
+    private String agencia;
+    private String numero;
+    private Usuario usuario;
     
     private List<Investimento> investimentos;
-
+    
     /**
      * @return the id
      */
@@ -66,43 +67,29 @@ public class Conta implements java.io.Serializable{
     /**
      * @return the agencia
      */
-    public int getAgencia() {
+    public String getAgencia() {
         return agencia;
     }
 
     /**
      * @param agencia the agencia to set
      */
-    public void setAgencia(int agencia) {
+    public void setAgencia(String agencia) {
         this.agencia = agencia;
     }
 
     /**
      * @return the conta
      */
-    public int getConta() {
-        return conta;
+    public String getNumero() {
+        return numero;
     }
 
     /**
      * @param conta the conta to set
      */
-    public void setConta(int conta) {
-        this.conta = conta;
-    }
-
-    /**
-     * @return the digito
-     */
-    public int getDigito() {
-        return digito;
-    }
-
-    /**
-     * @param digito the digito to set
-     */
-    public void setDigito(int digito) {
-        this.digito = digito;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     /**
@@ -118,6 +105,27 @@ public class Conta implements java.io.Serializable{
     public void setInvestimentos(List<Investimento> investimentos) {
         this.investimentos = investimentos;
     }
+
+    /**
+     * @return the usuario
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 
     
 }

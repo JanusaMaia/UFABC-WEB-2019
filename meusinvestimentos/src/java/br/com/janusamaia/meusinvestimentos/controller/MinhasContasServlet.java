@@ -7,10 +7,11 @@ package br.com.janusamaia.meusinvestimentos.controller;
 
 import br.com.janusamaia.meusinvestimentos.dao.ContaDAO;
 import br.com.janusamaia.meusinvestimentos.dao.DataSource;
-import br.com.janusamaia.meusinvestimentos.dao.UsuarioDAO;
 import br.com.janusamaia.meusinvestimentos.model.Conta;
 import br.com.janusamaia.meusinvestimentos.model.Usuario;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -21,12 +22,14 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author janusam
+ * @author janus
  */
-public class LoginServlet extends HttpServlet {
+public class MinhasContasServlet extends HttpServlet {
 
+    
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -34,28 +37,17 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("inputEmail");
-        String senha = request.getParameter("inputSenha");
-        
-        Usuario user = new Usuario();
-        user.setEmail(email);
-        user.setSenha(senha);
-        String pagina = "/error.jsp";
-        
+        String pagina = "/";
         try{
-            DataSource ds = new DataSource();
-            UsuarioDAO usuarioDao = new UsuarioDAO(ds);
-            List<Object> res = usuarioDao.read(user);
-            if(res != null && res.size() > 0){
-                Usuario usuario = new Usuario();
-                usuario = (Usuario)res.get(0);
+            Usuario usuario = (Usuario)request.getSession().getAttribute("Usuario");
+            if(usuario != null){
                 if(usuario.getContas() == null){
-//                    DataSource datasource = new DataSource();
-                    ContaDAO contaDao = new ContaDAO(ds);
+                    DataSource datasource = new DataSource();
+                    ContaDAO contaDao = new ContaDAO(datasource);
                     List<Object> lista = contaDao.read(usuario.getId());
-//                    datasource.getConnection().close();
+                    datasource.getConnection().close();
                     
                     if(lista != null){
                         ArrayList<Conta> mContas = new ArrayList<Conta>();
@@ -67,18 +59,16 @@ public class LoginServlet extends HttpServlet {
                         usuario.setContas(mContas);   
                     }
                 }
-                pagina = "/myaccount.jsp";
-                request.getSession().setAttribute("Usuario", res.get(0));
+                request.getSession().setAttribute("Usuario", usuario);
+                pagina = "/minhascontas.jsp";
             }
             else{
-                request.setAttribute("erroSTR", "Usuário/Senha inválidos.");
+                pagina = "/login.jsp";
             }
-            ds.getConnection().close();
         }
-        catch(Exception ex){
-            request.setAttribute("erroSTR", "Erro ao recuperar dados.");
+        catch(SQLException ex){
+            System.out.println("Erro ao recuperar contas. "+ex.getMessage());
         }
-        
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
         dispatcher.forward(request, response);
     }

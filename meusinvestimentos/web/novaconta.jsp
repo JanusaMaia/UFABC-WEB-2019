@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,48 +13,42 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="text-center text-muted bg-dark font-weight-normal" style="margin-bottom: 0">
-                    Meus Investimentos
-                </h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar align-content-end bg-dark">
-                    <ul class="nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="./">Voltar</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+         <jsp:include page="menulogado.jsp" />
         
         <div class="row">
             <div class="col-md-3">
             </div>
             <div class="col-md-6">
                 <br><br>
-                <form role="form" action="loginservlet" method="POST">
+                <form role="form" action="efetivaConta" method="POST">
                     <div class="form-group">
-                        <label for="InputEmail">
-                                Email
+                        <label for="InputNomeConta">
+                                Nome da conta
                         </label>
-                        <input type="email" class="form-control" id="InputEmail" name="inputEmail" />
+                        <input type="text" class="form-control" id="InputNomeConta" name="inputNomeConta" required="true"/>
                     </div>
                     <div class="form-group">
-                        <label for="InputSenha">
-                                Senha
+                        <label for="InputBanco">
+                                Banco
                         </label>
-                        <input type="password" class="form-control" id="InputSenha" name="inputSenha" />
+                        <input type="text" class="form-control" id="InputBanco" name="inputBanco" required="true"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="InputAgencia">
+                                Agência
+                        </label>
+                        <input type="text" class="form-control" id="InputAgencia" name="inputAgencia" required="true"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="InputNumero">
+                                Número
+                        </label>
+                        <input type="text" class="form-control" id="InputNumero" name="inputNumero" required="true" />
                     </div>
                     
                     <button type="submit" class="btn btn-primary">
-                            Acessar
+                            Salvar
                     </button>
-                    Novo usuário? Clique <a href="novousuario">aqui</a>
                 </form>
             </div>
             <div class="col-md-3">

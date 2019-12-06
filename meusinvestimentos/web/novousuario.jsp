@@ -36,24 +36,35 @@
             </div>
             <div class="col-md-6">
                 <br><br>
-                <form role="form" action="loginservlet" method="POST">
+                <form role="form" action="efetivaCadastro" method="POST">
+                    <div class="form-group">
+                        <label for="InputNome">
+                                Nome
+                        </label>
+                        <input type="text" class="form-control" id="InputNome" name="inputNome" required="true"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="InputUsername">
+                                Username
+                        </label>
+                        <input type="text" class="form-control" id="InputUsername" name="inputUsername" required="true"/>
+                    </div>
                     <div class="form-group">
                         <label for="InputEmail">
                                 Email
                         </label>
-                        <input type="email" class="form-control" id="InputEmail" name="inputEmail" />
+                        <input type="email" class="form-control" id="InputEmail" name="inputEmail" required="true" />
                     </div>
                     <div class="form-group">
                         <label for="InputSenha">
                                 Senha
                         </label>
-                        <input type="password" class="form-control" id="InputSenha" name="inputSenha" />
+                        <input type="password" class="form-control" id="InputSenha" name="inputSenha" required="true"/>
                     </div>
                     
                     <button type="submit" class="btn btn-primary">
-                            Acessar
+                            Salvar
                     </button>
-                    Novo usuário? Clique <a href="novousuario">aqui</a>
                 </form>
             </div>
             <div class="col-md-3">

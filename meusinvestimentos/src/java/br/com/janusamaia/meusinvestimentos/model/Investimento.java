@@ -5,7 +5,7 @@
  */
 package br.com.janusamaia.meusinvestimentos.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -13,11 +13,13 @@ import java.util.Date;
  */
 public class Investimento implements java.io.Serializable{
     private int id;
-    private int nomeInvestimento;
+    private String nomeInvestimento;
+    private String categoria;
     private Date dataDoInvestimento;
     private Date dataDeVencimento;
-    private double taxaPactuada;
-    private String indice;
+    private Double valorInicial;
+    private Double valorAtual;
+    private Conta conta;
 
     /**
      * @return the id
@@ -36,14 +38,14 @@ public class Investimento implements java.io.Serializable{
     /**
      * @return the nomeInvestimento
      */
-    public int getNomeInvestimento() {
+    public String getNomeInvestimento() {
         return nomeInvestimento;
     }
 
     /**
      * @param nomeInvestimento the nomeInvestimento to set
      */
-    public void setNomeInvestimento(int nomeInvestimento) {
+    public void setNomeInvestimento(String nomeInvestimento) {
         this.nomeInvestimento = nomeInvestimento;
     }
 
@@ -76,31 +78,59 @@ public class Investimento implements java.io.Serializable{
     }
 
     /**
-     * @return the taxaPactuada
+     * @return the categoria
      */
-    public double getTaxaPactuada() {
-        return taxaPactuada;
+    public String getCategoria() {
+        return categoria;
     }
 
     /**
-     * @param taxaPactuada the taxaPactuada to set
+     * @param categoria the categoria to set
      */
-    public void setTaxaPactuada(double taxaPactuada) {
-        this.taxaPactuada = taxaPactuada;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     /**
-     * @return the indice
+     * @return the conta
      */
-    public String getIndice() {
-        return indice;
+    public Conta getConta() {
+        return conta;
     }
 
     /**
-     * @param indice the indice to set
+     * @param conta the conta to set
      */
-    public void setIndice(String indice) {
-        this.indice = indice;
+    public void setConta(Conta conta) {
+        this.conta = conta;
+    }
+
+    /**
+     * @return the valorInicial
+     */
+    public Double getValorInicial() {
+        return valorInicial;
+    }
+
+    /**
+     * @param valorInicial the valorInicial to set
+     */
+    public void setValorInicial(Double valorInicial) {
+        this.valorInicial = valorInicial;
+    }
+
+    /**
+     * @return the valorAtual
+     */
+    public Double getValorAtual() {
+        return valorAtual;
+    }
+
+    /**
+     * @param valorAtual the valorAtual to set
+     */
+    public void setValorAtual(Double valorAtual) {
+        this.valorAtual = valorAtual;
     }
 
     

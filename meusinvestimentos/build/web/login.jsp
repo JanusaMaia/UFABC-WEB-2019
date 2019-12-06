@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Meus Investimentos</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -12,29 +12,54 @@
 </head>
 <body>
     <div class="container-fluid">
-        <nav class="navbar align-content-end bg-dark">
-            <ul class="nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="./">Voltar</a>
-                </li>
-
-            </ul>
-        </nav>
-        <br>
-        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="text-center text-muted bg-dark font-weight-normal" style="margin-bottom: 0">
+                    Meus Investimentos
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar align-content-end bg-dark">
+                    <ul class="nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="./">Voltar</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
         
-        <form class="form-signin" style="border-style: solid" action="loginservlet" method="POST">
-            <div class="form-group">
-                <label for="inputEmail1"></label>
-                <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp" placeholder="Seu email" required autofocus>
+        <div class="row">
+            <div class="col-md-3">
             </div>
-            <div class="form-group">
-                <label for="inputPassword1"></label>
-                <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Senha" required>
+            <div class="col-md-6">
+                <br><br>
+                <form role="form" action="loginservlet" method="POST">
+                    <div class="form-group">
+                        <label for="InputEmail">
+                                Email
+                        </label>
+                        <input type="email" class="form-control" id="InputEmail" name="inputEmail" />
+                    </div>
+                    <div class="form-group">
+                        <label for="InputSenha">
+                                Senha
+                        </label>
+                        <input type="password" class="form-control" id="InputSenha" name="inputSenha" />
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                            Acessar
+                    </button>
+                    Novo usuário? Clique <a href="novousuario">aqui</a>
+                </form>
             </div>
-
-            <button type="submit" class="btn btn-group-sm btn-primary btn-block">Enviar</button>
-        </form>
+            <div class="col-md-3">
+            </div>
+        </div>
+        
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
