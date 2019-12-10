@@ -5,21 +5,13 @@
  */
 package br.com.janusamaia.meusinvestimentos.dao;
 
-import br.com.janusamaia.meusinvestimentos.model.Conta;
-import br.com.janusamaia.meusinvestimentos.model.Investimento;
 import br.com.janusamaia.meusinvestimentos.model.Usuario;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -37,13 +29,22 @@ public class UsuarioDAO implements GernericDAO{
     public void create(Object o) {
         try{
             if(o instanceof Usuario){
-                Usuario usuario = (Usuario)o;
-                String SQL = "INSERT INTO tblUsuario VALUES(null,?,?,?,?)";
+                Usuario usuario = (Usuario)o; System.out.println(usuario.getEstado());
+                String SQL = "INSERT INTO tblUsuario VALUES(null,?,?,?,?,?,?,?,?,?,?,?,?)";
                 PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
                 stm.setString(1, usuario.getNome());
                 stm.setString(2, usuario.getUsername());
                 stm.setString(3, usuario.getEmail());
                 stm.setString(4, usuario.getSenha());
+                stm.setString(5, usuario.getCep());
+                stm.setString(6, usuario.getRua());
+                stm.setString(7, usuario.getBairro());
+                stm.setString(8, usuario.getCidade());
+                stm.setString(9, usuario.getEstado());
+                stm.setString(10, usuario.getTipo());
+                stm.setString(11, usuario.getNumero());
+                stm.setString(12, usuario.getComplemento());
+                
                 int res = stm.executeUpdate();
                 if(res != 0){
                     ResultSet rs = stm.getGeneratedKeys();
@@ -65,7 +66,45 @@ public class UsuarioDAO implements GernericDAO{
 
     @Override
     public void update(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            if(o instanceof Usuario){
+                Usuario usuario = (Usuario)o;
+                String SQL = "UPDATE tblUsuario "
+                        + "SET nome = ?, "
+                        + "username = ?, "
+                        + "cep = ?, "
+                        + "rua = ?, "
+                        + "numero = ?, "
+                        + "complemento = ?, "
+                        + "bairro = ?, "
+                        + "cidade = ?, "
+                        + "estado = ?, "
+                        + "tipo = ? "
+                        + "WHERE id = ? ";
+                
+                PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
+                stm.setString(1, usuario.getNome());
+                stm.setString(2, usuario.getUsername());
+                stm.setString(3, usuario.getCep());
+                stm.setString(4, usuario.getRua());
+                stm.setString(5, usuario.getNumero());
+                stm.setString(6, usuario.getComplemento());
+                stm.setString(7, usuario.getBairro());
+                stm.setString(8, usuario.getCidade());
+                stm.setString(9, usuario.getEstado());
+                stm.setString(10, usuario.getTipo());
+                stm.setInt(11, usuario.getId());
+                
+                int res = stm.executeUpdate();
+                stm.close();
+            }
+            else{
+                throw new RuntimeException("Invalid user model object.");
+            }
+        }
+        catch(SQLException ex){
+            System.out.println("Erro ao atualizar usuário - "+ex.getMessage());
+        }
     }
 
     @Override

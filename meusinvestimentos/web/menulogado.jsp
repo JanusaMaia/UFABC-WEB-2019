@@ -24,12 +24,12 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="#">Relatórios</a>
+                                    <a class="nav-link" href="./relatorioTotal">Relatórios</a>
                             </li>
                             <li class="nav-item dropdown ml-md-auto">
                                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenu" data-toggle="dropdown" href="#">${Usuario.username}</a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenu">
-                                        <a class="dropdown-item" href="#">Perfil</a> 
+                                        <a class="dropdown-item" href="./editarPerfil">Perfil</a> 
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="./">Sair</a>
                                     </div>

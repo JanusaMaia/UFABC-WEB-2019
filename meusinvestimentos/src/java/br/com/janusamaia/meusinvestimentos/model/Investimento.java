@@ -6,6 +6,7 @@
 package br.com.janusamaia.meusinvestimentos.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -15,8 +16,8 @@ public class Investimento implements java.io.Serializable{
     private int id;
     private String nomeInvestimento;
     private String categoria;
-    private Date dataDoInvestimento;
-    private Date dataDeVencimento;
+    private Timestamp dataDoInvestimento;
+    private Timestamp dataDeVencimento;
     private Double valorInicial;
     private Double valorAtual;
     private Conta conta;
@@ -49,34 +50,7 @@ public class Investimento implements java.io.Serializable{
         this.nomeInvestimento = nomeInvestimento;
     }
 
-    /**
-     * @return the dataDoInvestimento
-     */
-    public Date getDataDoInvestimento() {
-        return dataDoInvestimento;
-    }
-
-    /**
-     * @param dataDoInvestimento the dataDoInvestimento to set
-     */
-    public void setDataDoInvestimento(Date dataDoInvestimento) {
-        this.dataDoInvestimento = dataDoInvestimento;
-    }
-
-    /**
-     * @return the dataDeVencimento
-     */
-    public Date getDataDeVencimento() {
-        return dataDeVencimento;
-    }
-
-    /**
-     * @param dataDeVencimento the dataDeVencimento to set
-     */
-    public void setDataDeVencimento(Date dataDeVencimento) {
-        this.dataDeVencimento = dataDeVencimento;
-    }
-
+    
     /**
      * @return the categoria
      */
@@ -131,6 +105,34 @@ public class Investimento implements java.io.Serializable{
      */
     public void setValorAtual(Double valorAtual) {
         this.valorAtual = valorAtual;
+    }
+
+    /**
+     * @return the dataDoInvestimento
+     */
+    public Timestamp getDataDoInvestimento() {
+        return dataDoInvestimento;
+    }
+
+    /**
+     * @param dataDoInvestimento the dataDoInvestimento to set
+     */
+    public void setDataDoInvestimento(Timestamp dataDoInvestimento) {
+        this.dataDoInvestimento = dataDoInvestimento;
+    }
+
+    /**
+     * @return the dataDeVencimento
+     */
+    public Timestamp getDataDeVencimento() {
+        return dataDeVencimento;
+    }
+
+    /**
+     * @param dataDeVencimento the dataDeVencimento to set
+     */
+    public void setDataDeVencimento(Timestamp dataDeVencimento) {
+        this.dataDeVencimento = dataDeVencimento;
     }
 
     

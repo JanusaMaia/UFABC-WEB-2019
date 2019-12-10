@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group">
                         <label for="InputDataI">
-                                Data de investimeto
+                                Data de investimento
                         </label>
                         <input type="date" class="form-control" id="InputDataI" name="inputDataI" required="true" />
                     </div>
@@ -60,13 +60,22 @@
                         </label>
                         <input type="date" class="form-control" id="InputDataF" name="inputDataF" required="true" />
                     </div>
-                    <div class="form-group">
+<!--                    <div class="form-group">
                         <label for="InputValorInicial">
                                 Valor investido
                         </label>
                         <input type="text" class="form-control"  id="InputValorInicial" name="inputValorInicial" required="true"/>
-                    </div>
-                    
+                    </div>-->
+                    <div class="form-row">
+                        <label for="InputValorInicial">
+                            Valor investido
+                        </label>
+                        <div class="input-group"> 
+                            <span class="input-group-addon">R$</span>
+                            <input type="number" value="1.00" min="1.00" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="InputValorInicial" name="inputValorInicial" />
+                        </div>
+                    </div>    
+
                     <button type="submit" class="btn btn-primary">
                             Salvar
                     </button>

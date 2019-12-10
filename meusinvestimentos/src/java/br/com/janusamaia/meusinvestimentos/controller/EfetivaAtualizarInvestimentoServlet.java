@@ -12,9 +12,8 @@ import br.com.janusamaia.meusinvestimentos.model.Evolucao;
 import br.com.janusamaia.meusinvestimentos.model.Investimento;
 import br.com.janusamaia.meusinvestimentos.model.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -64,11 +63,22 @@ public class EfetivaAtualizarInvestimentoServlet extends HttpServlet {
                 Evolucao evolucao = new Evolucao();
                 
                 evolucao.setInvestimento(investimento);
-                try {
-                    evolucao.setData(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(data).getTime()));
-                } catch (ParseException ex) {
+                
+                try{
+                    SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd" );
+                    java.util.Date date1=dateFormat.parse(data);
+                    Timestamp dataInicial=new Timestamp(date1.getTime());
+                    investimento.setDataDoInvestimento(dataInicial);
+                }catch (ParseException ex) {    
                     Logger.getLogger(EfetivaInvestimentoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    
                 }
+                
+//                try {
+//                    evolucao.setData(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(data).getTime()));
+//                } catch (ParseException ex) {
+//                    Logger.getLogger(EfetivaInvestimentoServlet.class.getName()).log(Level.SEVERE, null, ex);
+//                }
                 evolucao.setValorAtualizado(Double.parseDouble(valorAtual));
                 evolucaoDao.create(evolucao);
                 investimentoDao.update(investimento);

@@ -23,9 +23,9 @@ public class DataSource {
     public DataSource(){
         try{
             hostname = "localhost";
-            database = "investimentos";
-            username = "userinvest";
-            password = "@invest";
+            database = "invest";
+            username = "userinvest3";
+            password = "@invesT1";
             String URL = "jdbc:mysql://"+hostname+":3306/"+database+"?useTimezone=true&serverTimezone=UTC";
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
             connection = DriverManager.getConnection(URL,username,password);

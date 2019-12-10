@@ -9,6 +9,7 @@ import br.com.janusamaia.meusinvestimentos.dao.DataSource;
 import br.com.janusamaia.meusinvestimentos.dao.UsuarioDAO;
 import br.com.janusamaia.meusinvestimentos.model.Usuario;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,26 +21,18 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author janus
  */
-public class EfetivaCadastroServlet extends HttpServlet {
+public class AtualizaCadastroServlet extends HttpServlet {
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String pagina = "/login.jsp";
-        Usuario usuario = new Usuario();
+//        Usuario usuario = new Usuario();
+        Usuario usuario = (Usuario)request.getSession().getAttribute("Usuario");
         try{
             String nome = request.getParameter("inputNome");
             String username = request.getParameter("inputUsername");
-            String email = request.getParameter("inputEmail");
-            String senha = request.getParameter("inputSenha");
             String cep = request.getParameter("inputCep");
             String tipo = request.getParameter("inputTipo"); 
             String rua = request.getParameter("inputRua"); 
@@ -51,8 +44,6 @@ public class EfetivaCadastroServlet extends HttpServlet {
 
             usuario.setNome(nome);
             usuario.setUsername(username);
-            usuario.setEmail(email);
-            usuario.setSenha(senha);
             usuario.setCep(cep);
             usuario.setRua(rua);
             usuario.setTipo(tipo);
@@ -61,16 +52,17 @@ public class EfetivaCadastroServlet extends HttpServlet {
             usuario.setBairro(bairro);
             usuario.setCidade(cidade);
             usuario.setEstado(estado);
+            
 
             DataSource datasource = new DataSource();
             UsuarioDAO usuarioDao = new UsuarioDAO(datasource);
-            usuarioDao.create(usuario);
+            usuarioDao.update(usuario);
 
             datasource.getConnection().close();
         }
         catch(SQLException ex){
-            System.out.println("Erro ao criar novo usuário - "+ex.getMessage());
-            request.setAttribute("erroSTR", "Erro ao criar novo cadastro de usuário.");
+            System.out.println("Erro ao atualizar cadastro - "+ex.getMessage());
+            request.setAttribute("erroSTR", "Erro ao atualizar cadastro de usuário.");
             pagina = "/error.jsp";
         }
         if(usuario.getId() != 0){

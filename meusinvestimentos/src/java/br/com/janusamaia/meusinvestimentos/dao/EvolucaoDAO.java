@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ public class EvolucaoDAO implements GernericDAO{
                 String SQL = "INSERT INTO tblEvolucao VALUES(null,?,?,?)";
                 PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
                 stm.setDouble(1, evolucao.getValorAtualizado());
-                stm.setDate(2, (Date)evolucao.getData());
+                stm.setTimestamp(2, (Timestamp)evolucao.getData());
                 stm.setInt(3,evolucao.getInvestimento().getId());
                 
                 int res = stm.executeUpdate();

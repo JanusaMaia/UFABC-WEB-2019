@@ -8,11 +8,11 @@ package br.com.janusamaia.meusinvestimentos.dao;
 import br.com.janusamaia.meusinvestimentos.model.Conta;
 import br.com.janusamaia.meusinvestimentos.model.Investimento;
 import br.com.janusamaia.meusinvestimentos.model.Usuario;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +37,8 @@ public class InvestimentoDAO implements GernericDAO{
                 PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
                 stm.setString(1, investimento.getNomeInvestimento());
                 stm.setString(2, investimento.getCategoria());
-                stm.setDate(3, (Date)investimento.getDataDoInvestimento());
-                stm.setDate(4, (Date)investimento.getDataDeVencimento());
+                stm.setTimestamp(3, (Timestamp)investimento.getDataDoInvestimento());
+                stm.setTimestamp(4, (Timestamp)investimento.getDataDeVencimento());
                 stm.setInt(5, investimento.getConta().getId());
                 stm.setDouble(6, investimento.getValorInicial());
                 stm.setDouble(7, investimento.getValorAtual());
@@ -105,10 +105,10 @@ public class InvestimentoDAO implements GernericDAO{
                 ArrayList<Investimento> list = new ArrayList<Investimento>();
                 while(rs.next()){
                     Investimento invest = new Investimento();
-                    invest.setNomeInvestimento(rs.getString("nome"));System.out.println(invest.getNomeInvestimento());
-                    invest.setCategoria(rs.getString("categoria"));System.out.println(invest.getCategoria());
-                    invest.setDataDoInvestimento(rs.getDate("data_investimento"));
-                    invest.setDataDeVencimento(rs.getDate("data_vencimento"));
+                    invest.setNomeInvestimento(rs.getString("nome"));
+                    invest.setCategoria(rs.getString("categoria"));
+                    invest.setDataDoInvestimento(rs.getTimestamp("data_investimento"));
+                    invest.setDataDeVencimento(rs.getTimestamp("data_vencimento"));
                     invest.setId(rs.getInt("id"));
                     invest.setValorInicial(rs.getDouble("valor_inicial"));
                     invest.setValorAtual(rs.getDouble("valor_atual"));
@@ -161,6 +161,42 @@ public class InvestimentoDAO implements GernericDAO{
         }
         catch(SQLException ex){
             System.out.println("Erro ao recuperar contas - "+ex.getMessage());
+        }
+        return null;
+    }
+    
+    
+    public ArrayList<Investimento> readInvestimentos(Object o) {
+        try{
+            Usuario usuario = (Usuario)o;
+            ArrayList<Object> listaRetorno = new ArrayList<Object>();
+            String SQL = "SELECT i.nome, i.categoria, i.data_investimento, i.data_vencimento, i.valor_inicial, i.valor_atual"
+                    + " FROM tblInvestimentos i"
+                    + " JOIN tblConta c on i.idConta = c.id"
+                    + " JOIN tblUsuario u on u.id = c.idUsuario"
+                    + " WHERE u.id = ?";
+            PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
+            stm.setInt(1, usuario.getId());
+            ResultSet rs = stm.executeQuery();
+            ArrayList<Investimento> list = new ArrayList<Investimento>();
+            while(rs.next()){
+                Investimento invest = new Investimento();
+                invest.setNomeInvestimento(rs.getString("nome"));System.out.println(invest.getNomeInvestimento());
+                invest.setCategoria(rs.getString("categoria"));System.out.println(invest.getCategoria());
+                invest.setDataDoInvestimento(rs.getTimestamp("data_investimento"));System.out.println(invest.getDataDoInvestimento());
+                invest.setDataDeVencimento(rs.getTimestamp("data_vencimento"));System.out.println(invest.getDataDeVencimento());
+                invest.setValorInicial(rs.getDouble("valor_inicial"));System.out.println(invest.getValorInicial());
+                invest.setValorAtual(rs.getDouble("valor_atual"));System.out.println(invest.getValorAtual());
+                list.add(invest);
+            }
+                
+            listaRetorno.add(list);
+            rs.close();
+            stm.close();
+            return list;
+        }
+        catch(SQLException ex){
+            System.out.println("Erro ao recuperar investimentos - "+ex.getMessage());
         }
         return null;
     }

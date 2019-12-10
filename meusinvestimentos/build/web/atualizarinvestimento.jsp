@@ -39,12 +39,22 @@
                         <input type="date" class="form-control" id="InputData" name="inputData" required="true" />
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-row">
+                        <label for="InputValor">
+                            Valor Atual
+                        </label>
+                        <div class="input-group"> 
+                            <span class="input-group-addon">R$</span>
+                            <input type="number" value="1.00" min="1.00" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="InputValor" name="inputValor" />
+                        </div>
+                    </div> 
+                    
+<!--                    <div class="form-group">
                         <label for="InputValor">
                                 Valor Atual
                         </label>
                         <input type="text" class="form-control" id="InputValor" name="inputValor" required="true"/>
-                    </div>
+                    </div>-->
                     
                     <button type="submit" class="btn btn-primary">
                             Salvar

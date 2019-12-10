@@ -13,6 +13,7 @@ import br.com.janusamaia.meusinvestimentos.model.Investimento;
 import br.com.janusamaia.meusinvestimentos.model.Usuario;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -57,19 +58,32 @@ public class EfetivaInvestimentoServlet extends HttpServlet {
                 investimento.setNomeInvestimento(nome);
                 investimento.setCategoria(categoria);
                 
-                try {
-                    investimento.setDataDoInvestimento(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(dataI).getTime()));
-                } catch (ParseException ex) {
+                try{
+                    SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd" );
+                    java.util.Date date1=dateFormat.parse(dataI);
+                    java.util.Date date2=dateFormat.parse(dataF);
+                    Timestamp dataInicial=new Timestamp(date1.getTime());
+                    Timestamp dataFinal=new Timestamp(date2.getTime());
+                    investimento.setDataDoInvestimento(dataInicial);
+                    investimento.setDataDeVencimento(dataFinal);
+                }catch (ParseException ex) {    
                     Logger.getLogger(EfetivaInvestimentoServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    investimento.setDataDeVencimento(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(dataF).getTime()));
-                } catch (ParseException ex) {
-                    Logger.getLogger(EfetivaInvestimentoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    
                 }
                 
-                investimento.setValorInicial(Double.parseDouble(valorInicial));
-                investimento.setValorAtual(Double.parseDouble(valorInicial));
+//                try {
+//                    investimento.setDataDoInvestimento(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(dataI).getTime()));
+//                } catch (ParseException ex) {
+//                    Logger.getLogger(EfetivaInvestimentoServlet.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                try {
+//                    investimento.setDataDeVencimento(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(dataF).getTime()));
+//                } catch (ParseException ex) {
+//                    Logger.getLogger(EfetivaInvestimentoServlet.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+                System.out.println((valorInicial));
+                investimento.setValorInicial(Double.valueOf(valorInicial.replaceAll(",", ".")));
+                investimento.setValorAtual(Double.valueOf(valorInicial.replaceAll(",", ".")));
                 
                 InvestimentoDAO investimentoDao = new InvestimentoDAO(datasource);
                 investimentoDao.create(investimento);
@@ -91,7 +105,7 @@ public class EfetivaInvestimentoServlet extends HttpServlet {
             System.out.println("Erro ao cadastrar Investimento - "+ex.getMessage());
             request.setAttribute("erroSTR", "Erro ao criar investimento.");
             pagina = "/error.jsp";
-        }    
+        } 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
         dispatcher.forward(request, response);   
     }

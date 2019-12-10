@@ -44,7 +44,7 @@ public class ContaDAO implements GernericDAO{
                 }
                 ResultSet rs = stm.getGeneratedKeys();
                 if(rs.next()){     
-                    conta.setId(rs.getInt("id"));
+                    conta.setId(rs.getInt(1));
                 }
             }
             else{

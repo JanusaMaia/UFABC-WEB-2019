@@ -79,14 +79,14 @@ public class Conta implements java.io.Serializable{
     }
 
     /**
-     * @return the conta
+     * @return the numero
      */
     public String getNumero() {
         return numero;
     }
 
     /**
-     * @param conta the conta to set
+     * @param numero the conta to set
      */
     public void setNumero(String numero) {
         this.numero = numero;

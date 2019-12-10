@@ -1,4 +1,6 @@
+<%@page import="br.com.janusamaia.meusinvestimentos.model.Usuario"%>
 <!DOCTYPE html>
+<jsp:useBean id="Usuario" type="Usuario" scope="session"/>
 <html lang="pt-br">
 <head>
   <title>Meus Investimentos</title>
@@ -12,54 +14,31 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="text-center text-muted bg-dark font-weight-normal" style="margin-bottom: 0">
-                    Meus Investimentos
-                </h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar align-content-end bg-dark">
-                    <ul class="nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="./">Voltar</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-        
+         <jsp:include page="menulogado.jsp" />
+         
         <div class="row">
             <div class="col-md-3">
             </div>
             <div class="col-md-6">
-                <br><br>
-                <form role="form" action="efetivaCadastro" method="POST">
+                <br>Atualizar cadastro <hr><br>
+                <form role="form" action="atualizaCadastro" method="POST">
                     <div class="form-group">
                         <label for="InputNome">
                                 Nome
                         </label>
-                        <input type="text" class="form-control" id="InputNome" name="inputNome" required="true"/>
+                        <input type="text" value="${Usuario.nome}" class="form-control" id="InputNome" name="inputNome" required="true"/>
                     </div>
                     <div class="form-group">
                         <label for="InputUsername">
                                 Username
                         </label>
-                        <input type="text" class="form-control" id="InputUsername" name="inputUsername" required="true"/>
+                        <input type="text" value="${Usuario.username}" class="form-control" id="InputUsername" name="inputUsername" required="true"/>
                     </div>
                     <div class="form-group">
                         <label for="InputEmail">
                                 Email
                         </label>
-                        <input type="email" class="form-control" id="InputEmail" name="inputEmail" required="true" />
-                    </div>
-                    <div class="form-group">
-                        <label for="InputSenha">
-                                Senha
-                        </label>
-                        <input type="password" class="form-control" id="InputSenha" name="inputSenha" required="true"/>
+                        <input type="email" value="${Usuario.email}" readonly="true" class="form-control" id="InputEmail" />
                     </div>
                     
                     <!--endereço-->
@@ -68,52 +47,61 @@
                     <hr>    
                     <div class="form-group">
                         <label for="cep">
-                            Digite o CEP
+                            CEP
                         </label>
-                        <input type="text" class="form-control" id="cep" name="inputCep" onblur="buscaEndereco();"/>                            
+                        <input type="text" value="${Usuario.cep}" class="form-control" id="cep" name="inputCep" onchange="buscaEndereco();"/>                            
                     </div>
 
                     <div class="form-group">
                         <label for="tipo">
                             Tipo do Logradouro
                         </label>
-                        <input type="text" readonly="true" class="form-control" id="tipo" name="inputTipo" />
+                        <input type="text" value="${Usuario.tipo}" class="form-control" id="tipo" name="inputTipo" />
                     </div>
                     <div class="form-group">
                         <label for="logradouro">
                             Logradouro
                         </label>
-                        <input type="text" readonly="true" class="form-control" id="logradouro" name="inputRua" />
+                        <input type="text" value="${Usuario.rua}" class="form-control" id="logradouro" name="inputRua" />
                     </div>
-                    <div class="form-group">
-                        <label for="numero">
-                            Numero
-                        </label>
-                        <input type="text" class="form-control" id="numero" name="inputNumero" />
-                    </div>
-                    <div class="form-group">
-                        <label for="complemento">
-                            Complemento
-                        </label>
-                        <input type="text" class="form-control" id="complemento" name="inputComplemento" />
-                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="numero">
+                                    Numero
+                                </label>
+                                <input type="text" value="${Usuario.numero}" class="form-control" id="numero" name="inputNumero" />
+                            </div>
+                        </div> 
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="complemento">
+                                    Complemento
+                                </label>
+                                <input type="text" value="${Usuario.complemento}" class="form-control" id="complemento" name="inputComplemento" />
+                            </div>
+                        </div>
+                    </div>    
+                    
+                    
                     <div class="form-group">
                         <label for="bairro">
                             Bairro
                         </label>
-                        <input type="text" readonly="true" class="form-control" id="bairro" name="inputBairro" />
+                        <input type="text" value="${Usuario.bairro}" class="form-control" id="bairro" name="inputBairro" />
                     </div>
+                    
                     <div class="form-group">
                         <label for="cidade">
                             Cidade
                         </label>
-                        <input type="text" readonly="true"  class="form-control" id="cidade" name="inputCidade" />
+                        <input type="text" value="${Usuario.cidade}" class="form-control" id="cidade" name="inputCidade" />
                     </div>
                     <div class="form-group">
                         <label for="estado">
                             Estado
                         </label>
-                        <input type="text" readonly="true" class="form-control" id="estado" name="inputEstado" />
+                        <input type="text" value="${Usuario.estado}" class="form-control" id="estado" name="inputEstado" />
                     </div>
 
                     <hr>

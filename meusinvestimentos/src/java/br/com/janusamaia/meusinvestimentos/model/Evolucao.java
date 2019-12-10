@@ -6,6 +6,7 @@
 package br.com.janusamaia.meusinvestimentos.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.sql.Date;
 public class Evolucao implements java.io.Serializable{
     private int id;
     private Double valorAtualizado;
-    private Date data;
+    private Timestamp data;
     private Investimento investimento;
 
     /**
@@ -45,19 +46,7 @@ public class Evolucao implements java.io.Serializable{
         this.valorAtualizado = valorAtualizado;
     }
 
-    /**
-     * @return the data
-     */
-    public Date getData() {
-        return data;
-    }
-
-    /**
-     * @param data the data to set
-     */
-    public void setData(Date data) {
-        this.data = data;
-    }
+  
 
     /**
      * @return the investimento
@@ -71,6 +60,20 @@ public class Evolucao implements java.io.Serializable{
      */
     public void setInvestimento(Investimento investimento) {
         this.investimento = investimento;
+    }
+
+    /**
+     * @return the data
+     */
+    public Timestamp getData() {
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(Timestamp data) {
+        this.data = data;
     }
     
 }

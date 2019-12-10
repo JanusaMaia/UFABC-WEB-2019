@@ -44,6 +44,22 @@
         <servlet-name>EfetivaAtualizarInvestimentoServlet</servlet-name>
         <servlet-class>br.com.janusamaia.meusinvestimentos.controller.EfetivaAtualizarInvestimentoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditarPerfilServlet</servlet-name>
+        <servlet-class>br.com.janusamaia.meusinvestimentos.controller.EditarPerfilServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AtualizaCadastroServlet</servlet-name>
+        <servlet-class>br.com.janusamaia.meusinvestimentos.controller.AtualizaCadastroServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RelatorioTotalServlet</servlet-name>
+        <servlet-class>br.com.janusamaia.meusinvestimentos.controller.RelatorioTotalServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GerarPdfServlet</servlet-name>
+        <servlet-class>br.com.janusamaia.meusinvestimentos.controller.GerarPdfServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/loginservlet</url-pattern>
@@ -87,6 +103,22 @@
     <servlet-mapping>
         <servlet-name>EfetivaAtualizarInvestimentoServlet</servlet-name>
         <url-pattern>/efetivaAtualizarInvestimento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarPerfilServlet</servlet-name>
+        <url-pattern>/editarPerfil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtualizaCadastroServlet</servlet-name>
+        <url-pattern>/atualizaCadastro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioTotalServlet</servlet-name>
+        <url-pattern>/relatorioTotal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerarPdfServlet</servlet-name>
+        <url-pattern>/gerarPdf</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
